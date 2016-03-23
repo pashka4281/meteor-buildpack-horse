@@ -5,13 +5,7 @@
 # fail fast.
 set -e
 # debug verbosely.
-set -x
-
-export
-
-echo "-----> ENV: $(env)"
-
-printenv
+#set -x
 
 #Load config vars into environment (from https://devcenter.heroku.com/articles/buildpack-api)
 export_env_dir() {
@@ -66,6 +60,19 @@ curl -sS $NODE_URL -o - | tar -zxf - -C $COMPILE_DIR --strip 1
 export npm_config_prefix="$COMPILE_DIR"
 export CPATH="$COMPILE_DIR"/include
 export CPPPATH="$CPATH"
+
+
+#
+# Default ROOT_URL
+#
+if [ -z "$ROOT_URL" ]; then 
+  # pull from metadata
+  export ROOT_URL=$(node -pe 'JSON.parse(process.argv[1]).push_metadata.app_info.name + ".herokuapp.com"' $RECEIVE_DATA)
+  echo "--> ROOT_URL unset, using: $ROOT_URL"; 
+else
+  echo "--> ROOT_URL set, using: $ROOT_URL"; 
+fi
+
 
 #
 # Install meteor
