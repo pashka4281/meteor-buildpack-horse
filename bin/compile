@@ -67,7 +67,7 @@ export CPPPATH="$CPATH"
 #
 if [ -z "$ROOT_URL" ]; then 
   # pull from metadata
-  export ROOT_URL=$(node -pe 'JSON.parse(process.argv[1]).push_metadata.app_info.name + ".herokuapp.com"' $RECEIVE_DATA)
+  export ROOT_URL=$(node -pe '"http://" + JSON.parse(process.argv[1]).push_metadata.app_info.name + ".herokuapp.com"' $RECEIVE_DATA)
   echo "--> ROOT_URL unset, using: $ROOT_URL"; 
 else
   echo "--> ROOT_URL set, using: $ROOT_URL"; 
