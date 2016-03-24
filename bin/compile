@@ -85,7 +85,7 @@ echo "--> ROOT_URL set, using: $ROOT_URL";
 fi
 
 
-if [ -z "METEOR_SETTINGS" ]; then 
+if [ -z "$METEOR_SETTINGS" ]; then 
 
 echo "-----> Forcing METEOR_SETTINGS to dev environment"
 APP_SETTINGS="$APP_SOURCE_DIR/settings.dev.json"
