@@ -92,7 +92,7 @@ APP_SETTINGS="$APP_SOURCE_DIR/settings.dev.json"
 mkdir -p "$APP_CHECKOUT_DIR"/.profile.d
 cat > "$APP_CHECKOUT_DIR"/.profile.d/force-default-dev-settings.sh <<EOF
   #!/bin/sh
-  export METEOR_SETTINGS=$(cat $APP_SETTINGS)
+  export METEOR_SETTINGS='$(cat $APP_SETTINGS)'
 EOF
   
 else
