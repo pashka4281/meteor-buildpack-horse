@@ -66,20 +66,23 @@ export CPPPATH="$CPATH"
 # Default ROOT_URL
 #
 if [ -z "$ROOT_URL" ]; then 
-  # pull from metadata
-  export ROOT_URL=$(node -pe '"http://" + JSON.parse(process.argv[1]).push_metadata.app_info.name + ".herokuapp.com"' $RECEIVE_DATA)
-  echo "--> ROOT_URL unset, using: $ROOT_URL"; 
+
+# pull from metadata
+export ROOT_URL=$(node -pe '"http://" + JSON.parse(process.argv[1]).push_metadata.app_info.name + ".herokuapp.com"' $RECEIVE_DATA)
+echo "--> ROOT_URL unset, using: $ROOT_URL"; 
   
-  # Add an export of PATH which includes our compile dir.
-  echo "-----> Forcing ROOT_URL environment"
-  mkdir -p "$APP_CHECKOUT_DIR"/.profile.d
-  cat > "$APP_CHECKOUT_DIR"/.profile.d/force-default-root-url.sh <<EOF
-    #!/bin/sh
-    export ROOT_URL=\$ROOT_URL
+# Add an export of PATH which includes our compile dir.
+echo "-----> Forcing ROOT_URL environment"
+mkdir -p "$APP_CHECKOUT_DIR"/.profile.d
+cat > "$APP_CHECKOUT_DIR"/.profile.d/force-default-root-url.sh <<EOF
+  #!/bin/sh
+  export ROOT_URL=$ROOT_URL
 EOF
   
 else
-  echo "--> ROOT_URL set, using: $ROOT_URL"; 
+
+echo "--> ROOT_URL set, using: $ROOT_URL"; 
+
 fi
 
 
