@@ -71,7 +71,6 @@ if [ -z "$ROOT_URL" ]; then
 export ROOT_URL=$(node -pe '"http://" + JSON.parse(process.argv[1]).push_metadata.app_info.name + ".herokuapp.com"' $RECEIVE_DATA)
 echo "--> ROOT_URL unset, using: $ROOT_URL"; 
   
-# Add an export of PATH which includes our compile dir.
 echo "-----> Forcing ROOT_URL environment"
 mkdir -p "$APP_CHECKOUT_DIR"/.profile.d
 cat > "$APP_CHECKOUT_DIR"/.profile.d/force-default-root-url.sh <<EOF
@@ -82,6 +81,23 @@ EOF
 else
 
 echo "--> ROOT_URL set, using: $ROOT_URL"; 
+
+fi
+
+
+if [ -z "METEOR_SETTINGS" ]; then 
+
+echo "-----> Forcing METEOR_SETTINGS to dev environment"
+APP_SETTINGS="$APP_SOURCE_DIR/settings.dev.json"
+mkdir -p "$APP_CHECKOUT_DIR"/.profile.d
+cat > "$APP_CHECKOUT_DIR"/.profile.d/force-default-dev-settings.sh <<EOF
+  #!/bin/sh
+  export METEOR_SETTINGS=$(cat $APP_SETTINGS)
+EOF
+  
+else
+
+echo "--> METEOR_SETTINGS set, using: $METEOR_SETTINGS"; 
 
 fi
 
@@ -130,7 +146,7 @@ HOME=$METEOR_DIR $METEOR remove-platform android || true
 # of glibc (contained in cedar-14)
 if [ -n "${BUILDPACK_PRELAUNCH_METEOR+1}" ]; then
 echo "-----> Pre-launching Meteor to create packages assets and prevent bundling from failing"
-    HOME=$METEOR_DIR timeout -s9 60 $METEOR --settings settings.json || true
+    HOME=$METEOR_DIR timeout -s9 60 $METEOR --settings $APP_SETTINGS || true
 fi
 # </hack>
 
