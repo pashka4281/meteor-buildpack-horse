@@ -20,7 +20,7 @@ if [ -e $DUMP_DIR ]; then
   echo "-----> Extracting PhantomJS ${VERSION} binaries to ${DUMP_DIR}"
   tar jxf $ARCHIVE_FILE -C $DUMP_DIR
   
-  echo "-----> Copying ${DUMP_DIR}/${ARCHIVE_NAME} to ${COMPILE_DIR}"
-  mv $DUMP_DIR/$ARCHIVE_NAME $COMPILE_DIR
+  echo "-----> Copying ${DUMP_DIR}/${ARCHIVE_NAME}/bin/phantomjs to ${COMPILE_DIR}/bin/phantomjs"
+  mv $DUMP_DIR/$ARCHIVE_NAME/bin/phantomjs $COMPILE_DIR/bin/phantomjs
 fi
 
