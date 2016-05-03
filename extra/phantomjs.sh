@@ -16,7 +16,7 @@ fi
 
 DUMP_DIR=$ARCHIVE_DIR/extract
 mkdir -p $DUMP_DIR
-if ! [ -e $DUMP_DIR ]; then
+if [ -e $DUMP_DIR ]; then
   echo "-----> Extracting PhantomJS ${VERSION} binaries to ${DUMP_DIR}"
   tar jxf $ARCHIVE_FILE -C $DUMP_DIR
   
