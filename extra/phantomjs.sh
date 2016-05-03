@@ -4,7 +4,8 @@
 VERSION=1.9.7
 ARCHIVE_NAME=phantomjs-${VERSION}-linux-x86_64
 FILE_NAME=${ARCHIVE_NAME}.tar.bz2
-BUILDPACK_PHANTOMJS_PACKAGE=https://bitbucket.org/ariya/phantomjs/downloads/${FILE_NAME}
+# unoffical mirror, as bitbucket fails frequently
+BUILDPACK_PHANTOMJS_PACKAGE=https://s3.amazonaws.com/phantomjs-mirror/${FILE_NAME}
 
 ARCHIVE_DIR=$APP_CHECKOUT_DIR/.phantomjs
 ARCHIVE_FILE=$ARCHIVE_DIR/$FILE_NAME
