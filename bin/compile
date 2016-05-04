@@ -68,17 +68,26 @@ export CPPPATH="$CPATH"
 if [ -z "$ROOT_URL" ]; then 
 
 # use dyno-metadata: https://devcenter.heroku.com/articles/dyno-metadata
-if [ -z "$ROOT_URL" ] && [ -n "$HEROKU_APP_NAME" ] ; then
-  ROOT_URL="https://${HEROKU_APP_NAME}.herokuapp.com"
-fi
+ROOT_URL="https://${HEROKU_APP_NAME}.herokuapp.com"
+echo "-----> ROOT_URL not set setting to default: $ROOT_URL"; 
 
 else
 
-echo "--> ROOT_URL set, using: $ROOT_URL"; 
+echo "-----> ROOT_URL set with: $ROOT_URL"; 
+
+fi
+
+# Should we bail if no ROOT_URL is set?
+if [ -z "$ROOT_URL" ]; then 
+
+echo "-----> ROOT_URL still not set exiting!"; 
+exit 1
 
 fi
 
 
+
+# Force meteor settings or use METEOR_SETTINGS
 if [ -z "$METEOR_SETTINGS" ]; then 
 
 echo "-----> Forcing METEOR_SETTINGS to dev environment"
