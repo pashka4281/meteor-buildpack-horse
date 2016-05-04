@@ -70,7 +70,7 @@ echo "-----> RECEIVE_DATA: $RECEIVE_DATA"
 #
 
 # We do have ROOT_URL already set, or do we have HEROKU_APP_NAME or RECEIVE_DATA to parse?
-if [ -n "$ROOT_URL" ]; then 
+if [ -z "$ROOT_URL" ]; then 
 
 if [ -n "$HEROKU_APP_NAME" ]; then 
 # use dyno-metadata: https://devcenter.heroku.com/articles/dyno-metadata
