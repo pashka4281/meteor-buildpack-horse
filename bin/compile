@@ -68,6 +68,7 @@ export CPPPATH="$CPATH"
 if [ -z "$ROOT_URL" ]; then 
 
 # use dyno-metadata: https://devcenter.heroku.com/articles/dyno-metadata
+# OR https://devcenter.heroku.com/articles/github-integration-review-apps#heroku_app_name-and-heroku_parent_app_name as reviews dont seem to support lab features automatically
 ROOT_URL="https://${HEROKU_APP_NAME}.herokuapp.com"
 echo "-----> ROOT_URL not set setting to default: $ROOT_URL"; 
 
