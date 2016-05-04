@@ -73,13 +73,11 @@ echo "-----> RECEIVE_DATA: $RECEIVE_DATA"
 if [ -z "$ROOT_URL" ]; then 
 
 if [ -z "$HEROKU_APP_NAME" ]; then 
-
 # use dyno-metadata: https://devcenter.heroku.com/articles/dyno-metadata
 # OR https://devcenter.heroku.com/articles/github-integration-review-apps#heroku_app_name-and-heroku_parent_app_name as reviews dont seem to support lab features automatically
 ROOT_URL="https://${HEROKU_APP_NAME}.herokuapp.com"
 echo "-----> ROOT_URL setting to HEROKU_APP_NAME: $ROOT_URL"; 
-
-else 
+fi
 
 if [ -z "$RECEIVE_DATA" ]; then 
 # use dyno-metadata: https://devcenter.heroku.com/articles/dyno-metadata
@@ -88,16 +86,10 @@ ROOT_URL=$(node -pe '"http://" + JSON.parse(process.argv[1]).push_metadata.app_i
 echo "-----> ROOT_URL setting to RECEIVE_DATA: $ROOT_URL"; 
 fi
 
-fi
-# /fi $HEROKU_APP_NAME
-
 # Okay we're using what was already set
 else
-
 echo "-----> ROOT_URL set with: $ROOT_URL"; 
-
 fi
-# /fi $ROOT_URL
 
 # Should we bail if no ROOT_URL is set?
 if [ -z "$ROOT_URL" ]; then 
