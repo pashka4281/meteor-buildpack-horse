@@ -103,6 +103,13 @@ exit 1
 fi
 
 
+echo "-----> Forcing ROOT_URL environment"
+mkdir -p "$APP_CHECKOUT_DIR"/.profile.d
+cat > "$APP_CHECKOUT_DIR"/.profile.d/force-default-root-url.sh <<EOF
+  #!/bin/sh
+  export ROOT_URL=$ROOT_URL
+EOF
+
 
 # Force meteor settings or use METEOR_SETTINGS
 if [ -z "$METEOR_SETTINGS" ]; then 
