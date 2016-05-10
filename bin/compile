@@ -12,7 +12,7 @@ export_env_dir() {
   env_dir=$3
   whitelist_regex=${2:-'^(HEROKU_)'}
   blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
-  echo "-----> Exporting from: $env_dir"
+  echo "-----> Exporting from: $env_dir - Vars: \n $(ls $env_dir)"
   if [ -d "$env_dir" ]; then
     for e in $(ls $env_dir); do
       echo "     Available env: $e=$(cat $env_dir/$e)"
