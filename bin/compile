@@ -23,7 +23,7 @@ export_env_dir() {
 
   echo "-----> Exporting done"
 }
-export_env_dir
+export_env_dir $3
 
 # Get the path to dir one above this file.
 BUILDPACK_DIR=$(cd -P -- "$(dirname -- "$0")" && cd .. && pwd -P)
