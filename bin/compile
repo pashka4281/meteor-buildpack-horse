@@ -17,7 +17,7 @@ env_dir=$3
 
 #Load config vars into environment (from https://devcenter.heroku.com/articles/buildpack-api)
 export_env_dir() {
-  whitelist_regex=${2:-'^(HEROKU_)'}
+  whitelist_regex=${2:-'^(.*)'} # *@#$%@ it everything is permitted, only reject from blacklist
   blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
   echo "Export: whitelist: $whitelist_regex blacklist: $blacklist_regex"
   echo "-----> Exporting from: $env_dir - Vars: \n $(ls $env_dir)"
