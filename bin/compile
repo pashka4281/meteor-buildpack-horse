@@ -7,23 +7,16 @@ set -e
 # debug verbosely.
 #set -x
 
-echo "Debug 1: $1 \n $(ls $1)"
-echo "Debug 2: $2 \n $(ls $2)"
-echo "Debug 3: $3 \n $(ls $3)"
-echo "Debug 4: $4 \n $(ls $4)"
-echo "Debug 5: $5 \n $(ls $5)"
-
 env_dir=$3
 
 #Load config vars into environment (from https://devcenter.heroku.com/articles/buildpack-api)
 export_env_dir() {
   whitelist_regex=${2:-'^(.*)'} # *@#$%@ it everything is permitted, only reject from blacklist
   blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
-  echo "Export: whitelist: $whitelist_regex blacklist: $blacklist_regex"
-  echo "-----> Exporting from: $env_dir - Vars: \n $(ls $env_dir)"
+  echo "-----> Exporting from: $env_dir"
   if [ -d "$env_dir" ]; then
     for e in $(ls $env_dir); do
-      echo "     Available env: $e=$(cat $env_dir/$e)"
+      # echo "     Available env: $e=$(cat $env_dir/$e)"
       echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
       export "$e=$(cat $env_dir/$e)" && echo "     Exported env: $e=$(cat $env_dir/$e)"
       :
