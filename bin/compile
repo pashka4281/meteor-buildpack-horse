@@ -127,12 +127,10 @@ cat > "$APP_CHECKOUT_DIR"/.profile.d/force-default-meteor-settings.sh <<_EOF
 if [ -z "\$METEOR_SETTINGS" ]; then 
 
 export METEOR_SETTINGS=\$(cat <<EOF
-$APP_SETTINGS
+$(cat $APP_SETTINGS)
 EOF
 )
 
-else
-  # settings exists, nothing to do!
 fi
 _EOF
 
